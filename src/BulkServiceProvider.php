@@ -3,7 +3,6 @@
 namespace Rico\Bulky;
 
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class BulkServiceProvider extends ServiceProvider
