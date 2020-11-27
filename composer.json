@@ -12,13 +12,6 @@
       "Rico\\Bulky\\": "src/"
     }
   },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Rico\\Bulky\\ServiceProvider"
-      ]
-    }
-  },
   "authors": [
     {
       "name": "Rico Nijeboer",
