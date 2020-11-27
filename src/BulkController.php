@@ -2,27 +2,18 @@
 
 namespace Rico\Bulky;
 
-use Closure;
 use Illuminate\Http\Request;
 
-class BulkMiddleware
+class BulkController
 {
 
-    /** @var BulkKernel */
-    private $kernel;
-
-    public function __construct(BulkKernel $kernel)
-    {
-        $this->kernel = $kernel;
-    }
-
-    public function handle(Request $request, Closure $next)
+    public function handle(BulkKernel $kernel, Request $request)
     {
         $responses = [];
 
         foreach ($request->all() as $slug => $_)
         {
-            $responses[] = $this->kernel->handle($this->makeRequestForSlug($slug, $request));
+            $responses[] = $kernel->handle($this->makeRequestForSlug($slug, $request));
         }
 
         return new BulkResponse($responses);

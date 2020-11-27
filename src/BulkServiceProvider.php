@@ -2,15 +2,23 @@
 
 namespace Rico\Bulky;
 
-use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
 class BulkServiceProvider extends ServiceProvider
 {
 
-    public function boot()
+    public function register()
     {
-        $router = $this->app->make(Router::class);
-        $router->aliasMiddleware('bulky', BulkMiddleware::class);
+        $ownConfigPath = __DIR__ . '/../config/bulky.php';
+        $this->mergeConfigFrom($ownConfigPath, 'bulky');
+
+        if ($this->app->runningInConsole())
+        {
+            $this->publishes(
+                [
+                    $ownConfigPath => $this->app['path.config'] . DIRECTORY_SEPARATOR . 'bulky.php',
+                ]
+            );
+        }
     }
 }
