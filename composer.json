@@ -15,7 +15,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Rico\\Insomnia\\ServiceProvider"
+        "Rico\\Bulky\\ServiceProvider"
       ]
     }
   },
