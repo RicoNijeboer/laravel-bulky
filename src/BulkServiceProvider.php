@@ -2,10 +2,23 @@
 
 namespace Rico\Bulky;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
 class BulkServiceProvider extends ServiceProvider
 {
+
+    public function boot()
+    {
+        /** @var Router $router */
+        $router = app(Router::class);
+
+        $router->addRoute(
+            config('bulky.methods'),
+            config('bulky.slug'),
+            config('bulky.action')
+        );
+    }
 
     public function register()
     {
