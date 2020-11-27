@@ -15,7 +15,18 @@ class BulkServiceProvider extends ServiceProvider
 
         // Default;
         //   $router->any('/_bulk', [BulkController, 'handle']
-        $router->{config('bulky.method')}(config('bulky.slug'), config('bulky.action'));
+        $methods = config('bulky.method');
+
+        if ( ! is_array($methods))
+        {
+            $methods = [$methods];
+        }
+
+        do
+        {
+            $method = array_pop($methods);
+            $router->{$method}(config('bulky.slug'), config('bulky.action'));
+        } while (count($methods) > 0);
     }
 
     public function register()
