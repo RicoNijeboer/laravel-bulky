@@ -22,10 +22,10 @@ class BulkMiddleware
 
         foreach ($request->all() as $slug => $_)
         {
-            $responses[] = $next($this->makeRequestForSlug($slug, $request));
+            $responses[] = $this->kernel->handle($this->makeRequestForSlug($slug, $request));
         }
 
-        dd($responses);
+        return new BulkResponse($responses);
     }
 
     private function makeRequestForSlug(string $slug, Request $request): Request
