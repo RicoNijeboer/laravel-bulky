@@ -20,5 +20,7 @@ class BulkServiceProvider extends ServiceProvider
                 ]
             );
         }
+
+        parent::register();
     }
 }
