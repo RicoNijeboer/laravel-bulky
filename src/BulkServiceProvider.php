@@ -15,30 +15,31 @@ class BulkServiceProvider extends ServiceProvider
 
         // Default;
         //   $router->any('/_bulk', [BulkController, 'handle']
-        $methods = config('bulky.method');
+        $methods = config('bulky.methods');
 
         if ( ! is_array($methods))
         {
             $methods = [$methods];
         }
 
-        do
+        $methods = array_filter($methods);
+
+        while (count($methods) > 0)
         {
             $method = array_pop($methods);
             $router->{$method}(config('bulky.slug'), config('bulky.action'));
-        } while (count($methods) > 0);
+        }
     }
 
     public function register()
     {
-        $ownConfigPath = __DIR__ . '/../config/bulky.php';
-        $this->mergeConfigFrom($ownConfigPath, 'bulky');
+        $this->mergeConfigFrom(__DIR__ . '/../config/bulky.php', 'bulky');
 
         if ($this->app->runningInConsole())
         {
             $this->publishes(
                 [
-                    $ownConfigPath => $this->app['path.config'] . DIRECTORY_SEPARATOR . 'bulky.php',
+                    __DIR__ . '/../config/bulky.php' => $this->app['path.config'] . DIRECTORY_SEPARATOR . 'bulky.php',
                 ]
             );
         }
