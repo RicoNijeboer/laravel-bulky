@@ -1,6 +1,6 @@
 {
-  "name": "riconijeboer/laravel-to-insomnia",
-  "description": "This package enables you to convert your Laravel routes to a JSON file which you can import in Insomnia",
+  "name": "riconijeboer/laravel-bulky",
+  "description": "",
   "type": "library",
   "license": "MIT",
   "require": {
